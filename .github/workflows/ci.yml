@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+
+jobs:
+  desktop:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Install SDL2
+        run: brew install sdl2 cmake
+      - name: Bootstrap
+        run: ./scripts/bootstrap.sh
+      - name: Build desktop
+        run: ./scripts/build-desktop.sh
+      - name: Tests
+        run: ./scripts/test.sh
+
+  tab5:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Tab5 build
+        run: |
+          echo "Tab5 build requiere ESP-IDF 5.4.2 en el runner; omitido hasta imagen CI dedicada."

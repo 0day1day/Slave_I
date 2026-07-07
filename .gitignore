@@ -1,0 +1,26 @@
+# Build artifacts (ESP-IDF + desktop SDL sim)
+build/
+build_desktop/
+build-desktop/
+**/build/
+sdkconfig.old
+*.swp
+
+# Fetched dependencies (run scripts/bootstrap or fetch_repos.py)
+/dependencies/
+
+# Release binaries (attached to GitHub releases, not committed)
+/dist/
+/web-flasher/firmware/
+
+# Editor / OS
+.cache
+.vscode
+.DS_Store
+
+# Internal — kept locally, not published to the public repo
+/PRD.md
+/AGENTS.md
+/docs/
+/samples/
+/Testing/

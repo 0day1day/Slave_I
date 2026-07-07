@@ -1,0 +1,7 @@
+[
+    {
+        "url": "https://github.com/lvgl/lvgl.git",
+        "path": "dependencies/lvgl",
+        "branch": "v9.2.2"
+    }
+]

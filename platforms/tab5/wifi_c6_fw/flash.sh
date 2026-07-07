@@ -1,0 +1,1 @@
+esptool.py write_flash 0x0 ESP32C6-WiFi-SDIO-Interface-V1.4.1-96bea3a_0x0.bin

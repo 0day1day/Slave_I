@@ -1,0 +1,10 @@
+# Name,          Type, SubType, Offset,   Size, Flags
+# Launcher (demo) en factory + ota_0 para arrancar firmwares externos.
+# Volver al launcher = rollback OTA (reset -> factory). otadata para OTA.
+nvs,             data, nvs,     0x9000,   0x6000,
+otadata,         data, ota,     0xf000,   0x2000,
+phy_init,        data, phy,     0x11000,  0x1000,
+factory,         app,  factory, 0x20000,  0x680000,
+ota_0,           app,  ota_0,   ,         0x600000,
+human_face_det,  data, spiffs,  ,         0x64000,
+storage,         data, spiffs,  ,         0x200000,

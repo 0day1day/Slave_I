@@ -1,0 +1,51 @@
+name: Deploy web flasher to GitHub Pages
+
+# Publishes the web-flasher/ folder to GitHub Pages. Requires the repo to be
+# public (or GitHub Pro/Team) and Pages enabled with "GitHub Actions" as the
+# source (Settings -> Pages). The flasher pulls the firmware from the matching
+# GitHub release, so no binaries live in the repo.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'web-flasher/**'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+        with:
+          enablement: true   # auto-enable Pages (works once the repo is public / Pro+)
+      # Bundle the firmware INTO the Pages site (same origin as the flasher page) so
+      # the browser can fetch it -- GitHub release-asset URLs have no CORS header and
+      # get blocked. Pulled from the latest release, renamed to a stable filename.
+      - name: Fetch firmware from the latest release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p web-flasher/firmware
+          gh release download --repo "${{ github.repository }}" \
+            --pattern '*-p4-factory.bin' --dir web-flasher/firmware --clobber
+          mv web-flasher/firmware/*-p4-factory.bin web-flasher/firmware/slave-i-p4-factory.bin
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: web-flasher
+      - id: deployment
+        uses: actions/deploy-pages@v4

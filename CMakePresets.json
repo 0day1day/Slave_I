@@ -1,0 +1,55 @@
+{
+  "version": 6,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 24,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "desktop-debug",
+      "displayName": "Desktop Debug",
+      "generator": "Unix Makefiles",
+      "binaryDir": "${sourceDir}/build_desktop",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "name": "desktop-release",
+      "inherits": "desktop-debug",
+      "displayName": "Desktop Release",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    },
+    {
+      "name": "desktop-asan",
+      "inherits": "desktop-debug",
+      "displayName": "Desktop ASan",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "SANITIZE_ADDRESS": "ON"
+      }
+    },
+    {
+      "name": "tab5-debug",
+      "displayName": "Tab5 Debug (metadata)",
+      "description": "Tab5 se compila con idf.py; preset de referencia para CI/scripts."
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "desktop-debug",
+      "configurePreset": "desktop-debug"
+    },
+    {
+      "name": "desktop-release",
+      "configurePreset": "desktop-release"
+    },
+    {
+      "name": "desktop-asan",
+      "configurePreset": "desktop-asan"
+    }
+  ]
+}
