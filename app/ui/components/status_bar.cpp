@@ -65,16 +65,17 @@ StatusBar::StatusBar(lv_obj_t* parent)
     lv_obj_set_style_pad_hor(root_, tokens::SpaceMd, 0);
     lv_obj_set_style_pad_ver(root_, 0, 0);
     lv_obj_clear_flag(root_, LV_OBJ_FLAG_SCROLLABLE);
+    // Hidden screenshot trigger: long-press ANYWHERE on the top bar -> capture to SD.
+    // Big, forgiving target; no visible UI added to the frame.
+    lv_obj_add_flag(root_, LV_OBJ_FLAG_CLICKABLE);
+    lv_obj_add_event_cb(
+        root_, [](lv_event_t*) { spectra5_screenshot(); }, LV_EVENT_LONG_PRESSED, nullptr);
 
     lv_obj_t* wordmark = lv_label_create(root_);
     lv_label_set_text(wordmark, spectra5::kProjectName);
     lv_obj_set_style_text_color(wordmark, lv_semantic(SemanticColor::TextPrimary), 0);
     lv_obj_set_style_text_font(wordmark, &ibm_plex_mono_20, 0);
     lv_obj_align(wordmark, LV_ALIGN_LEFT_MID, 0, 0);
-    // Hidden screenshot trigger: long-press the wordmark -> capture to SD.
-    lv_obj_add_flag(wordmark, LV_OBJ_FLAG_CLICKABLE);
-    lv_obj_add_event_cb(
-        wordmark, [](lv_event_t*) { spectra5_screenshot(); }, LV_EVENT_LONG_PRESSED, nullptr);
 
     clock_ = make_label(root_, SemanticColor::TextPrimary);
     lv_label_set_text(clock_, "--:--");
