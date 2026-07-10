@@ -37,6 +37,7 @@ extern "C" void spectra5_sleep() {}
 extern "C" void spectra5_power_off() {}
 extern "C" struct _lv_group_t* spectra5_nav_group() { return nullptr; }
 extern "C" bool spectra5_keyboard_connected() { return false; }
+extern "C" void spectra5_screenshot() {}
 
 namespace {
 

@@ -8,6 +8,10 @@
 // True when the M5 I2C keyboard is connected (HAL on device, desktop stub).
 extern "C" bool spectra5_keyboard_connected();
 
+// Capture the screen to microSD (device: screenshot.cpp; desktop: stub). Hidden
+// trigger for clean demo stills: long-press the status-bar wordmark.
+extern "C" void spectra5_screenshot();
+
 namespace spectra5::ui {
 
 using tokens::SemanticColor;
@@ -67,6 +71,10 @@ StatusBar::StatusBar(lv_obj_t* parent)
     lv_obj_set_style_text_color(wordmark, lv_semantic(SemanticColor::TextPrimary), 0);
     lv_obj_set_style_text_font(wordmark, &ibm_plex_mono_20, 0);
     lv_obj_align(wordmark, LV_ALIGN_LEFT_MID, 0, 0);
+    // Hidden screenshot trigger: long-press the wordmark -> capture to SD.
+    lv_obj_add_flag(wordmark, LV_OBJ_FLAG_CLICKABLE);
+    lv_obj_add_event_cb(
+        wordmark, [](lv_event_t*) { spectra5_screenshot(); }, LV_EVENT_LONG_PRESSED, nullptr);
 
     clock_ = make_label(root_, SemanticColor::TextPrimary);
     lv_label_set_text(clock_, "--:--");

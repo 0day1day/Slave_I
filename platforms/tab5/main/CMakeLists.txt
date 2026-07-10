@@ -21,7 +21,7 @@ file(GLOB_RECURSE MY_SERVICES_SRCS
     ./services/*.cpp
 )
 
-idf_component_register(SRCS "app_main.cpp" "boot_splash.cpp" "about_overlay.cpp" "power_control.cpp" ${APP_LAYER_SRCS} ${MY_HAL_SRCS} ${MY_SERVICES_SRCS}
+idf_component_register(SRCS "app_main.cpp" "boot_splash.cpp" "about_overlay.cpp" "power_control.cpp" "screenshot.cpp" ${APP_LAYER_SRCS} ${MY_HAL_SRCS} ${MY_SERVICES_SRCS}
                     INCLUDE_DIRS "." ${APP_LAYER_INCS}
                     EMBED_TXTFILES "../audio/canon_in_d.mp3" "../audio/startup_sfx.mp3" "../audio/shutdown_sfx.mp3"
                     EMBED_FILES "assets/helmet.png" "assets/crest.png"
