@@ -5,7 +5,11 @@ for the ESP32-P4 (UI) + ESP32-C6 (radio) platform — Wi-Fi, BLE and 802.15.4 re
 and attack tooling with a touch UI, a physical-keyboard workflow, and a desktop
 emulator for development.
 
-> Slave I v0.1.0-dev · built on M5Stack's M5Tab5-UserDemo · [idiotsandwich.club](https://idiotsandwich.club)
+> Slave I v0.1.0 · built on M5Stack's M5Tab5-UserDemo · [idiotsandwich.club](https://idiotsandwich.club)
+
+<p align="center">
+  <img src="assets/slave-i-demo.gif" alt="Slave I running on the M5Stack Tab5" width="720">
+</p>
 
 ---
 
